@@ -17,8 +17,11 @@ export const SearchPage = () => {
 
       {status === "error" && error ? (
         <>
-          <Text>Something went wrong 🥲</Text>
-          <Text>{error.toString()}</Text>
+          <Text style={styles.centerText}>Something went wrong 🥲</Text>
+          <Text style={styles.centerText}>{error.toString()}</Text>
+          <Text style={styles.centerText}>
+            Please try again later or contact support.
+          </Text>
         </>
       ) : null}
 
