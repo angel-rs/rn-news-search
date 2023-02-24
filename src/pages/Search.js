@@ -15,10 +15,10 @@ export const SearchPage = () => {
     <View>
       <SearchBar placeholder="Search local news..." onChangeText={onSearch} />
 
-      {status === "error" ? (
+      {status === "error" && error ? (
         <>
-          <Text>Something wen't wrong 🥲</Text>
-          <Text>{error.message}</Text>
+          <Text>Something went wrong 🥲</Text>
+          <Text>{error.toString()}</Text>
         </>
       ) : null}
 
@@ -26,11 +26,11 @@ export const SearchPage = () => {
         <Text style={styles.centerText}>Searching... 🔎</Text>
       ) : null}
 
-      {status === "idle" && data ? (
+      {status === "idle" && data?.articles?.length > 0 ? (
         <>
-          <Text
-            style={styles.centerText}
-          >{`Displaying ${data.totalResults} results`}</Text>
+          <Text style={styles.centerText}>{`Displaying ${Number(
+            data.totalResults
+          ).toLocaleString("en-US")} results`}</Text>
           <ArticlesList
             articles={data.articles}
             onPressArticle={onPressArticle}
