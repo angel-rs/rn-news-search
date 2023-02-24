@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Linking } from "react-native";
 
 import { ArticlesList } from "../components/ArticlesList";
 import { SearchBar } from "../components/Searchbar";
@@ -6,6 +6,10 @@ import { useArticlesSearch } from "../hooks/useArticlesSearch";
 
 export const SearchPage = () => {
   const { status, data, error, onSearch } = useArticlesSearch();
+
+  const onPressArticle = (item) => {
+    Linking.openURL(item.url);
+  };
 
   return (
     <View>
@@ -27,7 +31,10 @@ export const SearchPage = () => {
           <Text
             style={styles.centerText}
           >{`Displaying ${data.totalResults} results`}</Text>
-          <ArticlesList articles={data.articles} />
+          <ArticlesList
+            articles={data.articles}
+            onPressArticle={onPressArticle}
+          />
         </>
       ) : null}
     </View>
